@@ -1,0 +1,260 @@
+	<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <title>AdminLTE 3 | Starter</title>
+	
+	  <!-- Google Font: Source Sans Pro -->
+	  <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
+	  <!-- Font Awesome Icons -->
+	  <link rel="stylesheet" th:href="@{/css/fontawesome-free.min.css}">
+	  <!-- overlayScrollbars -->
+	  <link rel="stylesheet" th:href="@{/css/overlayScrollbars.min.css}">
+	  <!-- Theme style -->
+	  <link rel="stylesheet" th:href="@{/css/adminlte.min.css}">
+	  <!-- Tagify style -->
+	  <link rel="stylesheet" th:href="@{/css/tagify.min.css}">
+	</head>
+	<body class="hold-transition light-mode sidebar-mini sidebar-collapse layout-fixed layout-navbar-fixed">
+	<div class="wrapper">
+	
+	  <!-- Preloader -->
+	  <div th:replace="admin/fragments/preloader :: shared"></div>
+	
+	  
+	  <!-- Navbar -->
+	  <nav th:replace="admin/fragments/navbar :: shared"></nav>
+	  <!-- /.navbar -->
+	
+	  <!-- Main Sidebar Container -->
+	  <aside th:replace="admin/fragments/sidebar :: shared"></aside>
+	
+	  <!-- Content Wrapper. Contains page content -->
+	  <div class="content-wrapper">
+	    <!-- Content Header (Page header) -->
+	    <div class="content-header">
+	      <div class="container-fluid">
+	        <div class="row mb-2">
+	          <div class="col-sm-6">
+	            <h1 class="m-0">Starter Page</h1>
+	          </div><!-- /.col -->
+	          <div class="col-sm-6">
+	            <ol class="breadcrumb float-sm-right">
+	              <li class="breadcrumb-item"><a th:href="@{#}">Home</a></li>
+	              <li class="breadcrumb-item active">Starter Page</li>
+	            </ol>
+	          </div><!-- /.col -->
+	        </div><!-- /.row -->
+	      </div><!-- /.container-fluid -->
+	    </div>
+	    <!-- /.content-header -->
+	
+	    <!-- Main content -->
+	    <section class="content">
+	      <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-12">
+	              <div class="card">
+	                <div class="card-header">
+	                  <h3 class="card-title">DataTable with default features</h3>
+	                </div>
+	                <!-- /.card-header -->
+	                <div class="card-body">
+	                  <form th:action="@{/admin/product/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+	                    <div class="form-group row">
+	                    <input type="hidden" th:field="*{id}" />
+	                      <label for="picture" class="col-2 col-form-label text-left">Tên:</label>
+	                        <div class="col-6">
+	                          <input type="text" class="form-control" id="name" name="name">
+	                        </div>
+	                    </div>
+	                    <div class="form-group row">
+	                        <label for="brand" class="col-2 col-form-label text-left">Thương hiệu:</label>
+	                          <div class="col-6">
+	                            <textarea  name="input-brand" placeholder="" id="brand" class="tagify--custom-dropdown" ></textarea>
+	                        </div>
+	                    </div>
+	                    <div class="form-group row">
+	                        <label for="parent" class="col-2 col-form-label text-left">Danh mục:</label>
+	                          <div class="col-6">
+	                            <select class="form-control" name="category.id" id="category">
+	                                <option value="-1" selected>Chọn 1 trong các danh mục sau</option>
+	                                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+	                              </select>                          
+	                            </div>
+	                    </div>
+	                    <div class="form-group row">
+	                        <label for="description" class="col-2 col-form-label text-left">Mô tả:</label>
+	                          <div class="col-6">
+	                            <textarea class="form-control" name="description" rows="5" id="editor"></textarea>
+	                          </div>
+	                      </div>
+	                      <div class="form-group row">
+	                        <label for="description" class="col-2 col-form-label text-left">Ảnh:</label>
+	                          <div class="col-6">
+								<input type="file" name="fileImage" accept="image/png, image/jpeg" id="fileImage" multiple/>
+	                          </div>
+	                      </div>
+	                      <div id="preview" class="form-group row">
+	                      	
+	                      </div>
+	                      <div class="row g-3">
+	                        <div class="col-md-6">
+	                            <label for="color" class="form-label">Màu sắc:</label>
+	                            <textarea  name="input-color" placeholder="Chọn màu sắc" id="dropdown-colors" class="tagify--custom-dropdown" ></textarea>
+	                        </div>
+	                          <div class="col-md-6">
+	                            <label for="size" class="form-label">Kích cỡ:</label>
+	                            <textarea  name="input-size" placeholder="Chọn kích cỡ" id="dropdown-sizes" class="tagify--custom-dropdown" ></textarea>
+	                        </div>
+	                      </div>
+	                      <div class="table-responsive mt-3 d-flex">
+	                        <table id="example2" class="table table-bordered">
+	                          <thead class="thead-dark">
+	                            <tr>
+	                                <th class="text-center">Màu sắc</th>
+	                                <th class="text-center">Kích cỡ</th>
+	                                <th class="text-center h-100 col-1">Số lượng</th>
+	                                <th class="text-center h-100 col-4">Đơn giá</th>
+	                                <th class="text-center"></th>
+	                            </tr>
+	                          </thead>
+	                          <tbody id="tbProduct" th:object="${productItems}"></tbody>
+	                        </table>   
+	                      </div>
+	                     <!-- Submit Button -->
+						<button type="submit" class="btn btn-primary mb-3 mt-3 mb-4">Submit</button>
+	                  </form>
+	                </div>
+	                <!-- /.card-body -->
+	              </div>
+	              <!-- /.card -->
+	            </div>
+	            <!-- /.col -->
+	          </div>
+	          <!-- /.row -->
+	      </div><!--/. container-fluid -->
+	    </section>
+	    <!-- /.content -->
+	  </div>
+	  <!-- /.content-wrapper -->
+	
+	  <!-- Control Sidebar -->
+	  
+	  <!-- /.control-sidebar -->
+	
+	  <!-- Main Footer -->
+	  <footer th:replace="admin/fragments/footer :: shared"></footer>
+	</div>
+	<!-- ./wrapper -->
+	
+	<!-- REQUIRED SCRIPTS -->
+	
+	<!-- jQuery -->
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<!-- Bootstrap 4 -->
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<!-- overlayScrollbars -->
+	<script th:src="@{/js/overlayScrollbars.min.js}"></script>
+	<!-- AdminLTE App -->
+	<script th:src="@{/js/adminlte.min.js}"></script>
+	<!-- Tagify -->
+	<script th:src="@{/js/tagify.min.js}"></script>
+	
+	<script th:inline="javascript">
+	var colors = /*[[${colors}]]*/ [];
+	var sizes = /*[[${sizes}]]*/ [];
+	var brands = /*[[${brands}]]*/ [];
+	
+	    var inputC = document.querySelector('textarea[name="input-color"]'),
+	    // init Tagify script on the above inputs
+	    tagify = new Tagify(inputC, {
+	        whitelist: colors,
+	        maxTags: 10,
+	        dropdown: {
+	            maxItems: 20,           // <- mixumum allowed rendered suggestions
+	            classname: 'tags-look', // <- custom classname for this dropdown, so it could be targeted
+	            enabled: 0,             // <- show suggestions on focus
+	            closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+	        }
+	    }),
+	    inputS = document.querySelector('textarea[name="input-size"]'),
+	    // init Tagify script on the above inputs
+	    tagify = new Tagify(inputS, {
+	        whitelist: sizes,
+	        maxTags: 10,
+	        dropdown: {
+	            maxItems: 20,           // <- mixumum allowed rendered suggestions
+	            classname: 'tags-look', // <- custom classname for this dropdown, so it could be targeted
+	            enabled: 0,             // <- show suggestions on focus
+	            closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+	        }
+	    });
+	    inputB = document.querySelector('textarea[name="input-brand"]'),
+	    // init Tagify script on the above inputs
+	    tagify = new Tagify(inputB, {
+	        whitelist: brands,
+	        maxTags: 1,
+	        dropdown: {
+	            maxItems: 10,           // <- mixumum allowed rendered suggestions
+	            classname: 'tags-look', // <- custom classname for this dropdown, so it could be targeted
+	            enabled: 0,             // <- show suggestions on focus
+	            closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+	        }
+	    });
+	    const table = $(".table");
+	    table.addClass("hidden");
+	    var productCount = 1;
+	    $("#dropdown-colors, #dropdown-sizes").on("change", invokingOnChangeEvent);
+	    function invokingOnChangeEvent(event) {
+	        table.removeClass("hidden");
+	        $('#tbProduct').empty();
+	        var selectedColors = JSON.parse(inputC.value);
+	        var selectedSizes = JSON.parse(inputS.value);
+	        for (var i = 0; i < selectedColors.length; i++) {
+	            for (var j = 0; j < selectedSizes.length; j++) {
+	            	var index = i*selectedSizes.length + j + 1;
+	                var row = `
+	                            <tr>
+	                                ${(j==0)?'<td class="text-center" rowspan="'+selectedSizes.length+'">'+selectedColors[i].value:''}
+	                                <td class="text-center">${selectedSizes[j].value}
+	                                	<input type="hidden" name=${'"productItems['+index+'].color.name"'} class= ${'"input-group-'+index+'"'}  value=${'"'+selectedColors[i].value+'"'}/>
+	                                    <input type="hidden" name=${'"productItems['+index+'].size.name"'} class= ${'" input-group-'+index+'"'} value=${'"'+selectedSizes[j].value+'"'}/>
+									</td>
+	                                <td class=""><input name=${'"productItems['+index+'].quantity"'} class= ${'"text-center p-0 m-0 form-control input-group-'+index+'"'} type="text" value=""></td>
+	                                <td class=""><input name=${'"productItems['+index+'].priceRetail"'} class= ${'"text-center p-0 m-0 form-control input-group-'+index+'"'} type="text" value="" id="demoPrice" data-a-dec="," data-a-sep="."></td>
+	                                <td class="text-center"><input type="checkbox" class="form-check-input disable-checkbox"></td>
+	                            </tr>
+	                         `;
+	                $('#tbProduct').append(row);
+	                productCount++;
+	            }
+	        }
+	    };
+	    $(document).on('change', '.disable-checkbox', function() {
+	        // Xử lý sự kiện khi nút "Delete" được click
+	    	console.log("Checkbox changed");
+	        const group = $(this).closest("tr").find("input[type]").not(this);
+	        group.prop("disabled", $(this).is(":checked"));
+	        if ($(this).is(":checked")) {
+	            group.val(null); // Đặt giá trị của tất cả các input trong nhóm thành null
+	        }
+	    });
+	    
+	    $(document).on('change', '[name="fileImage"]', function() {
+	    	$("#preview").empty();//you can remove this code if you want previous user input
+	        for(let i=0;i<this.files.length;++i){
+	            let filereader = new FileReader();
+	            let $img=jQuery.parseHTML('<img class="col-3 m-1 p-1 img-fluid">');
+	            filereader.onload = function(){
+	                $img[0].src= this.result;
+	            };
+	        filereader.readAsDataURL(this.files[i]); // Đọc dữ liệu từ tệp đã chọn
+	        $("#preview").append($img); // Thêm ảnh vào phần tử có id là "preview"
+	        }
+	    });
+	</script>
+	
+	</body>
+	</html>

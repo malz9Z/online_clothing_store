@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MultiShop - Online Shop Website Template</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="Free HTML Templates" name="keywords">
+  <meta content="Free HTML Templates" name="description">
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" th:href="@{/css/fontawesome-free.min.css}">
+  <!-- Libraries Stylesheet -->
+  <link th:href="@{/css/animate.min.css}" rel="stylesheet">
+  <link th:href="@{/css/owl.carousel.min.css}" rel="stylesheet">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+  <!-- Topbar Start -->
+  <div th:replace="shop/fragments/topbar :: shared">
+
+  </div>
+  <!-- Topbar End -->
+  <!-- Navbar Start -->
+  <div th:replace="shop/fragments/navbar :: shared">
+
+  </div>
+  <!-- Navbar End -->
+  <!-- Content Start -->
+  <div class="container-fluid">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Đăng ký</span></h2>
+        <div class="row px-xl-5 justify-content-center">
+            <div class="col-lg-10 mb-5">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <div class="row">
+                            <div class="control-group col-md-6">
+                                <input type="email" class="form-control" id="email" placeholder="Email"
+                                    required="required" data-validation-required-message="Email không được bỏ trống!" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group col-md-6">
+                                <input type="text" class="form-control" id="name" placeholder="Số điện thoại"
+                                    required="required" data-validation-required-message="Số điện thoại khồng được bỏ trống!" 
+                                    pattern="^(((\+|)84)|0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$"
+                                    data-validation-pattern-message="Không phải là một số điện thoại hợp lệ!"/>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="control-group col-md-6">
+                                <input type="password" name="inputPassword" class="form-control" id="password" placeholder="Mật khẩu"
+                                    required="required" data-validation-required-message="Mật khảu không được bỏ trống!"
+                                    minlength="4" data-validation-minlength-message="Mật khảu bao phải bao gồm 4 kí tự!"/>
+                                <p class="help-block text-danger"></p>
+                                <p id="password-strength"></p>
+                            </div>
+                            <div class="control-group col-md-6">
+                                <input type="password" class="form-control" id="rePassword" placeholder="Xác nhận mật khẩu" 
+                                    data-validation-match-match="inputPassword" 
+                                    data-validation-match-message="Mật khẩu xác nhận không khớp với mật khẩu đã nhập!" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Đăng ký</button>
+                        </div>
+                    </form>
+                    <a href="login.html" class="text-center">Đã có tài khoản - Đăng nhâp</a>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+  <!-- Content End -->
+  <!-- Main Footer -->
+  <footer th:replace="shop/fragments/footer :: shared"></footer>
+  <!-- REQUIRED SCRIPTS -->
+
+  <!-- jQuery -->
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/js/easing.min.js}"></script>
+  <script th:src="@{/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+  <script th:src="@{/js/jqBootstrapValidation.min.js}"></script>
+  <script th:src="@{/js/validateProfile.js}"></script>
+  <script>
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); });
+  </script>
+</body>
+
+</html>
