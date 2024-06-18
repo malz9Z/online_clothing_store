@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>MultiShop - Online Shop Website Template</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="Free HTML Templates" name="keywords">
+  <meta content="Free HTML Templates" name="description">
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" th:href="@{/css/fontawesome-free.min.css}">
+  <!-- Libraries Stylesheet -->
+  <link th:href="@{/css/animate.min.css}" rel="stylesheet">
+  <link th:href="@{/css/owl.carousel.min.css}" rel="stylesheet">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <script type="text/javascript" src="/js/jquery.simplePagination.js"></script>
+
+</head>
+
+<body>
+  <!-- Topbar Start -->
+  <div th:replace="shop/fragments/topbar :: shared">
+
+  </div>
+  <!-- Topbar End -->
+  <!-- Navbar Start -->
+  <div th:replace="shop/fragments/navbar :: shared">
+
+  </div>
+  <!-- Shop Start -->
+  <div class="container-fluid">
+    <div class="row px-xl-5">
+      <!-- Shop Sidebar Start -->
+      <div class="col-lg-3 col-md-4">
+        <div class="section-title position-relative text-uppercase mb-3">
+          <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse"
+            href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+            <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Danh mục</h6>
+            <i class="fa fa-angle-down text-dark"></i>
+          </a>
+          <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
+            id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+            <div class="navbar-nav w-100">
+              <div th:each="category : ${categories}" th:if="${category.parent == null}"
+                class="nav-item dropdown dropright">
+                <a href="#" th:value="${category.id}" th:text="${category.name}" class="nav-link dropdown-toggle"
+                  data-toggle="dropdown"> <i class="fa fa-angle-right float-right mt-1"></i></a>
+                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                  <a th:each="category : ${categories}" th:if="${category.parent != null}"
+                    th:href="@{'/store/category/' + ${category.id}}" th:value="${category.id}"
+                    th:text="${category.name}" href="" class="dropdown-item"></a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <!-- Color Start -->
+        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc</span></h5>
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                  Theo nhãn hiệu</a>
+              </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+              <div class="bg-light p-4 mb-30">
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" checked id="size-all">
+                  <label class="custom-control-label" for="size-all">Tất cả</label>
+                  <span class="badge border font-weight-normal"></span>
+                </div>
+                <div th:each="brand, iterator : ${brands}"
+                  class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" th:id="@{'brand-' + ${iterator.index+1}}">
+                  <label class="custom-control-label" th:for="@{'brand-' + ${iterator.index+1}}" th:value="${brand}"
+                    th:text="${brand}"></label>
+                  <span class="badge border font-weight-normal"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                  Theo màu sắc</a>
+              </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse in">
+              <div class="bg-light p-4 mb-30">
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" checked id="color-all">
+                  <label class="custom-control-label" for="color-all">Tất cả</label>
+                  <span class="badge border font-weight-normal"></span>
+                </div>
+                <div th:each="color, iterator : ${colors}"
+                  class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" th:id="@{'color-' + ${iterator.index+1}}">
+                  <label class="custom-control-label" th:for="@{'color-' + ${iterator.index+1}}" th:value="${color}"
+                    th:text="${color}"></label>
+                  <span class="badge border font-weight-normal"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                  Theo kích thước</a>
+              </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+              <div class="bg-light p-4 mb-30">
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" checked id="size-all">
+                  <label class="custom-control-label" for="size-all">Tất cả</label>
+                  <span class="badge border font-weight-normal"></span>
+                </div>
+                <div th:each="size, iterator : ${sizes}"
+                  class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" th:id="@{'size-' + ${iterator.index+1}}">
+                  <label class="custom-control-label" th:for="@{'size-' + ${iterator.index+1}}" th:value="${size}"
+                    th:text="${size}"></label>
+                  <span class="badge border font-weight-normal"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                  Theo giá</a>
+              </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+              <div class="bg-light p-4 mb-30">
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" checked id="price-all">
+                  <label class="custom-control-label" for="price-all">All Price</label>
+                  <span class="badge border font-weight-normal">1000</span>
+                </div>
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" id="price-1">
+                  <label class="custom-control-label" for="price-1">$0 - $100</label>
+                  <span class="badge border font-weight-normal">150</span>
+                </div>
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" id="price-2">
+                  <label class="custom-control-label" for="price-2">$100 - $200</label>
+                  <span class="badge border font-weight-normal">295</span>
+                </div>
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" id="price-3">
+                  <label class="custom-control-label" for="price-3">$200 - $300</label>
+                  <span class="badge border font-weight-normal">246</span>
+                </div>
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <input type="checkbox" class="custom-control-input" id="price-4">
+                  <label class="custom-control-label" for="price-4">$300 - $400</label>
+                  <span class="badge border font-weight-normal">145</span>
+                </div>
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                  <input type="checkbox" class="custom-control-input" id="price-5">
+                  <label class="custom-control-label" for="price-5">$400 - $500</label>
+                  <span class="badge border font-weight-normal">168</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Color End -->
+
+      </div>
+      <!-- Shop Sidebar End -->
+
+
+      <!-- Shop Product Start -->
+      <div class="col-lg-9 col-md-8">
+        <div class="row pb-3">
+          <div class="col-12 pb-1">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <div>
+                <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
+                <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+              </div>
+              <div class="ml-2">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                    data-toggle="dropdown">Sắp xếp</button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Latest</a>
+                    <a class="dropdown-item" href="#">Popularity</a>
+                    <a class="dropdown-item" href="#">Best Rating</a>
+                  </div>
+                </div>
+                <div class="btn-group ml-2">
+                  <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                    data-toggle="dropdown">Showing</button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">10</a>
+                    <a class="dropdown-item" href="#">20</a>
+                    <a class="dropdown-item" href="#">30</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 pb-1" th:each="product : ${productPage}">
+            <div class="product-item bg-light mb-4">
+              <div class="product-img position-relative overflow-hidden">
+                <img class="img-fluid w-100" th:src="${product} ? '/images/prod-2.jpg' : '/images/prod-2.jpg'" alt="">
+                <div class="product-action">
+                  <a class="btn btn-outline-dark btn-square w-25" th:href="@{/store/product-detail/}+${product.id}"><i class="fa fa-search-plus"></i></a>
+                  <a class="btn btn-outline-dark btn-square w-25" href=""><i class="far fa-heart"></i></a>
+                </div>
+              </div>
+              <div class="text-center py-4">
+                <a class="h6 text-decoration-none text-truncate" th:href="@{/store/product-detail/}+${product.id}" th:text="${product.name}"></a>
+                <div class="d-flex align-items-center justify-content-center mt-2">
+                  <h5 th:text="${#numbers.formatDecimal(product.minPrice, 0, 'COMMA', 0, 'POINT')}+'   -   '+${#numbers.formatDecimal(product.maxPrice, 0, 'COMMA', 0, 'POINT')}+'đ'"></h5>
+                </div>
+                <div class="d-flex align-items-center justify-content-center mt-2">
+                  <h6 class="text-muted ml-2"><del th:text="${#numbers.formatDecimal(product.minPrice, 0, 'COMMA', 0, 'POINT')}+'   -   '+${#numbers.formatDecimal(product.maxPrice, 0, 'COMMA', 0, 'POINT')}+'đ'"></del></h6>
+                </div>
+                <div class="d-flex align-items-center justify-content-center mb-1">
+                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small>(99)</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <nav>
+              <ul class="pagination justify-content-center">
+                <!-- First Page Link -->
+                <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                  <a class="page-link" th:href="${currentPage > 1} ? @{/store(page=1)} : 'javascript:void(0)'">Đầu</a>
+                </li>
+                <!-- Previous Page Link -->
+                <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                  <a class="page-link"
+                    th:href="${currentPage > 1} ? @{/store(page=${currentPage - 1})} : 'javascript:void(0)'">Trước</a>
+                </li>
+                <!-- Ellipsis Before -->
+                <li class="page-item" th:if="${currentPage > 3}">
+                  <a class="page-link" href="javascript:void(0)">...</a>
+                </li>
+                <!-- Page Numbers -->
+                <li class="page-item"
+                  th:each="i : ${#numbers.sequence(currentPage > 2 ? currentPage - 1 : 1, currentPage < totalPages - 1 ? currentPage + 1 : totalPages)}"
+                  th:classappend="${i == currentPage} ? 'active'">
+                  <a class="page-link" th:href="@{/store(page=${i})}" th:text="${i}"></a>
+                </li>
+                <!-- Ellipsis After -->
+                <li class="page-item" th:if="${currentPage < totalPages - 2}">
+                  <a class="page-link" href="javascript:void(0)">...</a>
+                </li>
+                <!-- Next Page Link -->
+                <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                  <a class="page-link"
+                    th:href="${currentPage < totalPages} ? @{/store(page=${currentPage + 2})} : 'javascript:void(0)'">Tiếp</a>
+                </li>
+                <!-- Last Page Link -->
+                <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                  <a class="page-link"
+                    th:href="${currentPage < totalPages} ? @{/store(page=${totalPages})} : 'javascript:void(0)'">Sau</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <!-- Shop Product End -->
+    </div>
+  </div>
+  <!-- Shop End -->
+  <!-- Main Footer -->
+  <footer th:replace="shop/fragments/footer :: shared"></footer>
+  <!-- REQUIRED SCRIPTS -->
+  <!-- Back to Top -->
+  <a th:replace="shop/fragments/backtotop :: shared"></a>
+  <!-- REQUIRED SCRIPTS -->
+
+  <!-- jQuery -->
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/js/easing.min.js}"></script>
+  <script th:src="@{/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

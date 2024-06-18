@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Starter</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" th:href="@{/css/fontawesome-free.min.css}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" th:href="@{/css/overlayScrollbars.min.css}">
+  <!-- DataTables -->
+  <link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/css/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/css/buttons.bootstrap4.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/css/adminlte.min.css}">
+</head>
+<body class="hold-transition light-mode sidebar-mini sidebar-collapse layout-fixed layout-navbar-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div th:replace="admin/fragments/preloader :: shared"></div>
+
+  
+  <!-- Navbar -->
+  <nav th:replace="admin/fragments/navbar :: shared"></nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside th:replace="admin/fragments/sidebar :: shared"></aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Starter Page</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a th:href="@{#}">Home</a></li>
+              <li class="breadcrumb-item active">Starter Page</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">DataTable with default features</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <a th:href="@{/admin/product/add}" class="btn btn-primary mb-3">Thêm sản phẩm</a>
+                  <div class="table-responsive">
+                    <table id="productTable" class="table table-hover table-bordered">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Tên</th>
+                          <th scope="col">Danh mục</th>
+                          <th scope="col">Thương hiệu</th>
+                          <th scope="col">Màu sắc</th>
+                          <th scope="col">Kích cỡ</th>
+                          <th scope="col">Khoảng giá</th>
+                          <th scope="col">Đánh giá</th>
+                          <th scope="col">Tổng số lượng biến thể</th>
+                          <th scope="col">Tổng số lượng tồn kho</th>
+                          <th scope="col">Hiển thị</th>
+                          <th scope="col" style="width: 6rem;"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="product, iterator : ${products}">
+							<td th:text="${iterator.index+1}"></td>
+							<td th:text="${product.name}"></td>
+							<td th:text="${product.category}"></td>
+							<td th:text="${product.brand}"></td>
+							<td>
+							<ul>
+		                        <li th:each="color : ${product.colors}" th:text="${color}"></li>
+		                    </ul>
+							</td>
+							<td>
+							<ul>
+                        		<li th:each="size : ${product.sizes}" th:text="${size}"></li>
+		                    </ul>
+							</td>
+							<td th:text="${product.minPrice.toString + '   -   ' + product.maxPrice.toString}"></td>
+			                <td th:text="${product.star}"></td>
+			                <td th:text="${product.quantityItem}"></td>
+			                <td th:text="${product.quantityTotal}"></td>
+							<td>
+								<i th:if="${product.isDeleted}" class="fa fa-times-circle fa-2x text-danger"></i>
+								<i th:unless="${product.isDeleted}" class="fa fa-check-circle fa-2x text-success" ></i>
+							</td>
+							<td>						
+								<a th:href="@{'/admin/product/edit/' + product.id}"
+								   class=" col-12 btn btn-primary btn-sm"><i class="fas fa-edit"></i>Chi tiết</a>
+							</td>
+						</tr>
+                      </tbody>
+                      </table>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer th:replace="admin/fragments/footer :: shared"></footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/js/adminlte.min.js}"></script>
+<!-- DataTables  & Plugins -->
+<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/js/dataTables.responsive.min.js}"></script>
+<script th:src="@{/js/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/js/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/js/jszip.min.js}"></script>
+<script th:src="@{/js/pdfmake.min.js}"></script>
+<script th:src="@{/js/vfs_fonts.js}"></script>
+<script th:src="@{/js/buttons.html5.min.js}"></script>
+<script th:src="@{/js/buttons.print.min.js}"></script>
+<script th:src="@{/js/buttons.colVis.min.js}"></script>
+<script>
+$(function () {
+    $("#productTable").DataTable({
+      "responsive": true,
+      "columnDefs": [
+          {"className": "dt-center", "targets": "_all"}
+        ],
+      "lengthChange": true,
+      "autoWidth": false,
+      "lengthMenu": [5, 10, 30, 50, 100],
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+</script>
+</body>
+</html>

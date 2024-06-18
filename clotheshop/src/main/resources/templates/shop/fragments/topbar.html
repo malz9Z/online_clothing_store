@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>MultiShop - Online Shop Website Template</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="Free HTML Templates" name="keywords">
+  <meta content="Free HTML Templates" name="description">
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" th:href="@{/css/fontawesome-free.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+  <!-- Topbar Start -->
+  <div th:fragment="shared" class="container-fluid">
+    <div class="row align-items-center bg-light py-2 px-xl-5 d-none d-lg-flex">
+      <div class="col-lg-4">
+        <p class="m-0">Hotline:</p>
+        <h5 class="m-0">+012 345 6789</h5>
+      </div>
+      <div class="col-lg-4 col-6 text-left">
+        <form action="">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Tìm sản phẩm">
+            <div class="input-group-append">
+              <span class="input-group-text bg-transparent text-primary">
+                <i class="fa fa-search"></i>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-4 col-6 text-left">
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-primary">Đăng nhập</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/register}" class="btn btn-outline-dark animate__animated animate__fadeInUp">Đăng ký</a>
+        <div sec:authorize="isAuthenticated()" class="btn-group px-0">
+          <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown">
+            <img src="img/carousel-1.jpg" class=""
+              style="width: 40px; height: 40px; clip-path: circle(20px at 50% 50%);" alt="Avatar" />
+            Tài khoản
+          </button>
+          <div class="dropdown-menu dropdown-menu-left z-2000">
+            <a class="dropdown-item" type="button">
+              <i class="fa fa-user icon"></i>
+              <span>Hồ Sơ</span>
+            </a>
+            <a class="dropdown-item" type="button">
+              <i class="fa fa-heart icon"></i>
+              <span>Yêu thích</span>
+            </a>
+            <a class="dropdown-item" type="button">
+              <i class="fa fa-list-alt icon"></i>
+              <span>Đơn hàng</span>
+            </a>
+            <a th:href="@{/logout}" class="dropdown-item text-danger" type="button">
+              <i class="fa fa-user icon"></i>
+              <span>Đăng xuất</span>
+            </a>
+            <a th:href="@{/admin}" class="dropdown-item" sec:authorize="hasRole('ADMIN')" type="button">
+              <i class="fa fa-user-astronaut icon"></i>
+              <span>ADMIN</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Topbar End -->
+
+  <!-- REQUIRED SCRIPTS -->
+
+  <!-- jQuery -->
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>
