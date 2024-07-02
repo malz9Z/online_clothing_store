@@ -3,8 +3,8 @@ package com.thungashoe.util;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.thungashoe.dto.ProductDTO;
-import com.thungashoe.entity.Product;
+import com.thungashoe.domain.dto.ProductDTO;
+import com.thungashoe.domain.entity.Product;
 
 public class ProductConverter {
 

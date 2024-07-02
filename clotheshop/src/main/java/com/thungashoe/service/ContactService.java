@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.thungashoe.entity.Contact;
+import com.thungashoe.domain.entity.Contact;
 import com.thungashoe.repository.ContactRepository;
 
 @Service

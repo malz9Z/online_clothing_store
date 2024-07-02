@@ -12,12 +12,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.thungashoe.dto.ProductResponse;
-import com.thungashoe.entity.Brand;
-import com.thungashoe.entity.Color;
-import com.thungashoe.entity.Product;
-import com.thungashoe.entity.ProductItem;
-import com.thungashoe.entity.Size;
+import com.thungashoe.domain.dto.ProductResponse;
+import com.thungashoe.domain.entity.Brand;
+import com.thungashoe.domain.entity.Color;
+import com.thungashoe.domain.entity.Product;
+import com.thungashoe.domain.entity.ProductItem;
+import com.thungashoe.domain.entity.Size;
 import com.thungashoe.repository.BrandRepository;
 import com.thungashoe.repository.ColorRepository;
 import com.thungashoe.repository.ProductItemRepository;
@@ -49,7 +49,7 @@ public class ProductService {
 	@Autowired
 	private SizeRepository sizeRepository;
 
-	public Product getProductById(Long productId) {
+	public Product getProductById(String productId) {
         return productRepository.findById(productId).orElse(null);
 	}
 
@@ -161,7 +161,7 @@ public class ProductService {
 	}
 
 	@Transactional
-	public void updateProduct(Long productId, Product updatedProduct) {
+	public void updateProduct(String productId, Product updatedProduct) {
 		
 		String brandName = updatedProduct.getBrand().getName();
 		Brand brand = brandRepository.findByName(brandName).orElseGet(() -> {
@@ -198,7 +198,7 @@ public class ProductService {
 		}
 	}
 
-	public void statusProduct(Long productId) {
+	public void statusProduct(String productId) {
 		Product product = getProductById(productId);
 		if (product != null) {
 			product.setPublishTime(null);

@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.thungashoe.entity.Size;
+import com.thungashoe.domain.entity.Size;
 
 @Repository
 public interface SizeRepository extends JpaRepository<Size, Long>{

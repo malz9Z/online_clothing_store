@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.thungashoe.dto.ProductDTO;
-import com.thungashoe.dto.ProductResponse;
-import com.thungashoe.entity.Brand;
-import com.thungashoe.entity.Category;
-import com.thungashoe.entity.Product;
+import com.thungashoe.domain.dto.ProductDTO;
+import com.thungashoe.domain.dto.ProductResponse;
+import com.thungashoe.domain.entity.Brand;
+import com.thungashoe.domain.entity.Category;
+import com.thungashoe.domain.entity.Product;
 import com.thungashoe.service.CategoryService;
 import com.thungashoe.service.ProductService;
 import com.thungashoe.util.ArrayJsonConverter;
@@ -57,7 +57,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/product/edit/{id}")
-	public String editCategory(Model model, @PathVariable Long id) {
+	public String editCategory(Model model, @PathVariable String id) {
 		List<Category> categories = categoryService.getAllCategories();
 		model.addAttribute("categories", categories);
         model.addAttribute("product", productService.getProductById(id));

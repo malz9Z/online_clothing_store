@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.thungashoe.entity.Voucher;
+import com.thungashoe.domain.entity.Voucher;
 import com.thungashoe.repository.VoucherRepository;
 
 @Service
@@ -18,7 +18,7 @@ public class VoucherService {
         return voucherRepository.findAll();
     }
 	
-	public Voucher getVoucherById(Long voucherId) {
+	public Voucher getVoucherById(String voucherId) {
 		return voucherRepository.findById(voucherId).orElse(null);
     }
 	
@@ -26,7 +26,7 @@ public class VoucherService {
         voucherRepository.save(voucher);
     }
 	
-	public void updateVoucher(Long voucherId, Voucher updatedVoucher) {
+	public void updateVoucher(String voucherId, Voucher updatedVoucher) {
         Voucher existingVoucher = getVoucherById(voucherId);
         if (existingVoucher != null) {
         	updatedVoucher.setId(voucherId);

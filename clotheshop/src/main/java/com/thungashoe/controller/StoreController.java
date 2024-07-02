@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thungashoe.dto.ProductResponse;
-import com.thungashoe.entity.Product;
-import com.thungashoe.entity.ProductItem;
+import com.thungashoe.domain.dto.ProductResponse;
+import com.thungashoe.domain.entity.Product;
+import com.thungashoe.domain.entity.ProductItem;
 import com.thungashoe.service.CategoryService;
 import com.thungashoe.service.ProductService;
 
@@ -40,7 +40,7 @@ public class StoreController {
 	}
 	
 	@GetMapping("/product-detail/{id}")
-    public String getProductDetails(@PathVariable Long id, Model model) {
+    public String getProductDetails(@PathVariable String id, Model model) {
         Product product = productService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("selectedItem", new ProductItem());

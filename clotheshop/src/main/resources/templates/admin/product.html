@@ -61,28 +61,33 @@
 	                </div>
 	                <!-- /.card-header -->
 	                <div class="card-body">
-	                  <form th:action="@{/admin/product/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+	                  <form th:action="@{/admin/product/save}" th:object="${product}" method="post" enctype="multipart/form-data" novalidate="novalidate">
 	                    <div class="form-group row">
 	                    <input type="hidden" th:field="*{id}" />
 	                      <label for="picture" class="col-2 col-form-label text-left">Tên:</label>
-	                        <div class="col-6">
-	                          <input type="text" class="form-control" id="name" name="name">
+	                        <div class="control-group col-6">
+	                          <input type="text" class="form-control" id="name" name="name"
+	                          required="required" data-validation-required-message="Tên không được bỏ trống!">
+	                          <p class="help-block text-danger"></p>
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
 	                        <label for="brand" class="col-2 col-form-label text-left">Thương hiệu:</label>
-	                          <div class="col-6">
-	                            <textarea  name="input-brand" placeholder="" id="brand" class="tagify--custom-dropdown" ></textarea>
+	                          <div class="control-group col-6">
+	                            <textarea  name="input-brand" placeholder="" id="brand" class="form-control tagify--custom-dropdown" 
+	                            required="required" data-validation-required-message="Tên không được bỏ trống!"></textarea>
+	                            <p class="help-block text-danger"></p>
 	                        </div>
 	                    </div>
 	                    <div class="form-group row">
 	                        <label for="parent" class="col-2 col-form-label text-left">Danh mục:</label>
 	                          <div class="col-6">
-	                            <select class="form-control" name="category.id" id="category">
-	                                <option value="-1" selected>Chọn 1 trong các danh mục sau</option>
+	                            <select class="form-control" name="category.id" id="category" required>
+	                                <option value="" selected>Chọn 1 trong các danh mục sau</option>
 	                                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-	                              </select>                          
-	                            </div>
+	                            </select>
+	                            <p class="help-block text-danger"></p>                      
+	                          </div>
 	                    </div>
 	                    <div class="form-group row">
 	                        <label for="description" class="col-2 col-form-label text-left">Mô tả:</label>
@@ -162,6 +167,12 @@
 	<!-- Tagify -->
 	<script th:src="@{/js/tagify.min.js}"></script>
 	
+	<script th:src="@{/js/jqBootstrapValidation.min.js}"></script>
+	
+	<script>
+    	$(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); });
+  	</script>
+	
 	<script th:inline="javascript">
 	var colors = /*[[${colors}]]*/ [];
 	var sizes = /*[[${sizes}]]*/ [];
@@ -232,6 +243,7 @@
 	            }
 	        }
 	    };
+	    
 	    $(document).on('change', '.disable-checkbox', function() {
 	        // Xử lý sự kiện khi nút "Delete" được click
 	    	console.log("Checkbox changed");

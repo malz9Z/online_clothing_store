@@ -13,15 +13,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.thungashoe.common.OrderAction;
-import com.thungashoe.dto.CartDTO;
-import com.thungashoe.dto.CartItemDTO;
-import com.thungashoe.dto.ShippingDTO;
-import com.thungashoe.entity.Order;
-import com.thungashoe.entity.OrderDetail;
-import com.thungashoe.entity.OrderTrack;
-import com.thungashoe.entity.Product;
-import com.thungashoe.entity.ProductItem;
-import com.thungashoe.entity.User;
+import com.thungashoe.domain.dto.CartDTO;
+import com.thungashoe.domain.dto.CartItemDTO;
+import com.thungashoe.domain.dto.ShippingDTO;
+import com.thungashoe.domain.entity.Order;
+import com.thungashoe.domain.entity.OrderDetail;
+import com.thungashoe.domain.entity.OrderTrack;
+import com.thungashoe.domain.entity.ProductItem;
+import com.thungashoe.domain.entity.User;
 import com.thungashoe.repository.OrderDetailRepository;
 import com.thungashoe.repository.OrderRepository;
 import com.thungashoe.repository.OrderTrackRepository;
@@ -56,7 +55,7 @@ public class OrderService {
 		return orderRepository.findAll(pageable);
 	}
 	
-	public Order getOrderById(Long id) {
+	public Order getOrderById(String id) {
 		return orderRepository.findById(id).orElse(null);
 	}
 	

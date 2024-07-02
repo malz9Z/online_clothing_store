@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.thungashoe.entity.Sale;
+import com.thungashoe.domain.entity.Sale;
 import com.thungashoe.repository.SaleRepository;
 
 @Service
@@ -18,7 +18,7 @@ public class SaleService {
         return saleRepository.findAll();
     }
 	
-	public Sale getSaleById(Long saleId) {
+	public Sale getSaleById(String saleId) {
 		return saleRepository.findById(saleId).orElse(null);
     }
 	
@@ -26,7 +26,7 @@ public class SaleService {
         saleRepository.save(sale);
     }
 	
-	public void updateSale(Long saleId, Sale updatedSale) {
+	public void updateSale(String saleId, Sale updatedSale) {
         Sale existingSale = getSaleById(saleId);
         if (existingSale != null) {
         	updatedSale.setId(saleId);

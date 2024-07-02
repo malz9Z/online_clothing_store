@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.thungashoe.entity.User;
+import com.thungashoe.domain.entity.User;
 import com.thungashoe.repository.UserRepository;
 
 @Service
@@ -52,7 +52,7 @@ public class UserService {
 		return userRepository.findByRolesContaining(role, pageable);
 	}
 	
-	public User getUserById(Long userId) {
+	public User getUserById(String userId) {
 		return userRepository.findById(userId).orElse(null);
     }
 	
@@ -61,7 +61,7 @@ public class UserService {
         userRepository.save(user);
     }
 	
-	public void updateUser(Long userId, User updatedUser) {
+	public void updateUser(String userId, User updatedUser) {
         User existingUser = getUserById(userId);
         if (existingUser != null) {
         	updatedUser.setId(userId);
@@ -69,7 +69,7 @@ public class UserService {
         }
     }
 	
-	public void statusUser(Long userId) {
+	public void statusUser(String userId) {
         User user = getUserById(userId);
         if (user != null) {
         	try {

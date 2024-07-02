@@ -12,10 +12,10 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.thungashoe.entity.Product;
+import com.thungashoe.domain.entity.Product;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product>{
+public interface ProductRepository extends JpaRepository<Product, String>, JpaSpecificationExecutor<Product>{
 
     @EntityGraph(value = "graph.Product", type = EntityGraph.EntityGraphType.LOAD)
 	List<Product> findAll();
@@ -27,7 +27,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
 	Page<Product> findAll(Specification<Product> spec, Pageable pageable);
 	
     @EntityGraph(value = "graph.Product", type = EntityGraph.EntityGraphType.LOAD)
-	Optional<Product> findById(Long id);
+	Optional<Product> findById(String id);
 	
 //	@Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.productItems")
 //    List<Product> findAllWithItems();

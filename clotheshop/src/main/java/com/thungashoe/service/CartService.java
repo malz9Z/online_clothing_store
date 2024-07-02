@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.thungashoe.dto.CartDTO;
-import com.thungashoe.dto.CartItemDTO;
+import com.thungashoe.domain.dto.CartDTO;
+import com.thungashoe.domain.dto.CartItemDTO;
 import com.thungashoe.exception.ExistedCartItemException;
 
 import jakarta.servlet.http.HttpSession;

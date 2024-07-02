@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.thungashoe.entity.Brand;
-import com.thungashoe.entity.Category;
-import com.thungashoe.entity.Color;
-import com.thungashoe.entity.Product;
-import com.thungashoe.entity.ProductItem;
-import com.thungashoe.entity.Size;
+import com.thungashoe.domain.entity.Brand;
+import com.thungashoe.domain.entity.Category;
+import com.thungashoe.domain.entity.Color;
+import com.thungashoe.domain.entity.Product;
+import com.thungashoe.domain.entity.ProductItem;
+import com.thungashoe.domain.entity.Size;
 
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
